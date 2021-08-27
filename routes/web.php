@@ -25,4 +25,8 @@ Route::get("/guncelle",[kitapcontroller::class,'guncelle']);
 Route::get("/sil",[kitapcontroller::class,'sil']);
 Route::get("/kitapbilgileri",[kitapcontroller::class,'kitapbilgileri']);*/
 
-Route::get("/kitaplar",[kitapcontroller::class,'index']);
+Route::get("/kitaplar",[kitapcontroller::class,'vericek']);
+Route::post("/kitapekleform",[kitapcontroller::class,'ekle'])->name("verigiris");
+Route::get('welcome', function () {
+    return view('welcome');
+});
