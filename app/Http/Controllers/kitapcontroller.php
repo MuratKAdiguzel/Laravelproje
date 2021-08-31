@@ -25,19 +25,35 @@ class kitapcontroller extends Controller
             "kitapyazari"=>$kitapyazari,
             "kitapresmi"=>$kitapresmi,
             "kitapisbnnumarasi"=>$kitapisbnnumarasi,
-            
-          
         ]);
          return view("welcome");
         
     }
     
-    public function guncelle()
-    {
-        kitaplar::update();
+    public function kitapduzenle(Kitapmodel $kitap,Request $request)
+    {  
+        $validated = $request->validate([
+            'kitapadi' => 'max:60',
+            'kitapyazari' => 'max:60',
+            'kitapisbnnumarasi' => 'max:20',
+            'kitapresmi' => 'max:999',
+ 
+        ]);
+        
+    
+            $kitap->update([ 
+                "kitapadi"=>$request->kitapadi,
+                "kitapyazari"=>$request->kitapyazari,
+                "kitapisbnnumarasi"=>$request->kitapisbnnumarasi]);
+         
+           $kitap=kitapmodel::all();
+           return view("kitaplar",["kitap"=>$kitap]);
     }
-    public function sil()
+
+    public function sil($id)
     {
-        kitaplar::delete();
+        Kitapmodel::where("id",$id)->delete();
+        $kitap=kitapmodel::all();
+        return view("kitaplar",["kitap"=>$kitap]);
     }
 }
