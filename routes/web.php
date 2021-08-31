@@ -20,13 +20,15 @@ Route::get('/', function () {
 });
 
 
-/*Route::get("/ekle",[kitapcontroller::class,'ekle']);
-Route::get("/guncelle",[kitapcontroller::class,'guncelle']);
-Route::get("/sil",[kitapcontroller::class,'sil']);
-Route::get("/kitapbilgileri",[kitapcontroller::class,'kitapbilgileri']);*/
 
 Route::get("/kitaplar",[kitapcontroller::class,'vericek']);
 Route::post("/kitapekleform",[kitapcontroller::class,'ekle'])->name("verigiris");
 Route::get('welcome', function () {
     return view('welcome');
 });
+
+
+
+Route::get("/kitapsil{id}",[kitapcontroller::class,"sil"])->name("sil");
+Route::get("/kitapduzenle/{id}",[kitapcontroller::class,"kitapduzenle"])->name("kitapduzenle");
+
