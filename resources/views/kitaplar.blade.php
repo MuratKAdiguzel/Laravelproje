@@ -18,14 +18,14 @@
     </tr>
   </thead>
   <tbody>
-      @foreach($kitap as $key =>$kitap)
+      @foreach($book as $key =>$book)
     <tr>
-      <td>{{$kitap->kitapadi}}</td>
-      <td>{{$kitap->kitapyazari}}</td>
-      <td>{{$kitap->kitapisbnnumarasi}}</td>
-      <td>{{$kitap->kitapresmi}}</td>
-      <td> <button type="button" class="btn btn-primary">Düzenle</button> </td>
-      <td> <button type="button" class="btn btn-danger">Sil</button> </td>
+      <td>{{$book->kitapadi}}</td>
+      <td>{{$book->kitapyazari}}</td>
+      <td>{{$book->kitapisbnnumarasi}}</td>
+      <td><img style="height:200px; width:200px;"  src="{{ asset('/storage/images/'.$book->kitapresmi) }}"></td>
+      <td><a href="{{route('books.edit',['book'=>$book->id])}}" class="btn btn-primary" style="text-decoration: none;">Düzenle</a></td>
+      <td><a href="{{route('sil',['id'=>$book->id])}}" class="btn btn-danger" style="text-decoration: none;">Sil</a></td>
     </tr>
     @endforeach
     
