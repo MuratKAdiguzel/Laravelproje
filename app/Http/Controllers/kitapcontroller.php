@@ -15,6 +15,7 @@ class kitapcontroller extends Controller
 
         return view('kitaplar', ['book' => $books]);
     }
+    
  
     public function ekle(Request $request)
     {
