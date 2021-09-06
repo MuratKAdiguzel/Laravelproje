@@ -16,7 +16,7 @@ use App\Http\Controllers\kitapcontroller;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
@@ -33,5 +33,11 @@ Route::get("/kitapsil{id}",[kitapcontroller::class,"sil"])->name("sil");
 
 Route::put('/books/{book}', [kitapcontroller::class, 'store'])->name('books.update');
 Route::get("/books/{book}/edit",[kitapcontroller::class,"edit"])->name("books.edit");
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
