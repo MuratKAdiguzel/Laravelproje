@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 
-Route::get("/kitaplar",[kitapcontroller::class,'vericek']);
+Route::get("/kitaplar",[kitapcontroller::class,'index'])->name("index");
 Route::post("/kitapekleform",[kitapcontroller::class,'ekle'])->name("verigiris");
 Route::get('welcome', function () {
     return view('welcome');
@@ -30,5 +30,8 @@ Route::get('welcome', function () {
 
 
 Route::get("/kitapsil{id}",[kitapcontroller::class,"sil"])->name("sil");
-Route::get("/kitapduzenle/{id}",[kitapcontroller::class,"kitapduzenle"])->name("kitapduzenle");
+
+Route::put('/books/{book}', [kitapcontroller::class, 'store'])->name('books.update');
+Route::get("/books/{book}/edit",[kitapcontroller::class,"edit"])->name("books.edit");
+
 
