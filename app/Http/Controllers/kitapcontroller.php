@@ -8,29 +8,36 @@ use App\Models\kitapmodel;
 
 class kitapcontroller extends Controller
 {
-    public function vericek()
+
+    public function index()
     {
-        $kitap=kitapmodel::all();
-        return view("kitaplar",["kitap"=>$kitap]);
+        $books = kitapmodel::all();
+
+        return view('kitaplar', ['book' => $books]);
     }
+ 
     public function ekle(Request $request)
     {
         $kitapadi=$request->kitapadi;
         $kitapyazari=$request->kitapyazari;
         $kitapresmi=$request->kitapresmi;
         $kitapisbnnumarasi=$request->kitapisbnnumarasi;
-        
+
+        $destinationPath = 'public/images';
+        $image = $request->kitapresmi->getClientOriginalName();
+        $path = $request->file('kitapresmi')->storeAs($destinationPath, $image);
+
         kitapmodel::create([
             "kitapadi"=>$kitapadi,
             "kitapyazari"=>$kitapyazari,
-            "kitapresmi"=>$kitapresmi,
+            "kitapresmi"=>$image,
             "kitapisbnnumarasi"=>$kitapisbnnumarasi,
         ]);
          return view("welcome");
         
     }
     
-    public function kitapduzenle(Kitapmodel $kitap,Request $request)
+    public function store(Kitapmodel $book,Request $request)
     {  
         $validated = $request->validate([
             'kitapadi' => 'max:60',
@@ -41,19 +48,24 @@ class kitapcontroller extends Controller
         ]);
         
     
-            $kitap->update([ 
+            $book->update([ 
                 "kitapadi"=>$request->kitapadi,
                 "kitapyazari"=>$request->kitapyazari,
                 "kitapisbnnumarasi"=>$request->kitapisbnnumarasi]);
-         
-           $kitap=kitapmodel::all();
-           return view("kitaplar",["kitap"=>$kitap]);
+            
+                return redirect()->route('index');
+           
     }
-
+    public function edit(kitapmodel $book)
+    {
+        $bookedit = kitapmodel::find($book->id);
+        return view('duzenlekitaplar', ['bookedit' => $bookedit]);
+    }
+  
     public function sil($id)
     {
         Kitapmodel::where("id",$id)->delete();
-        $kitap=kitapmodel::all();
-        return view("kitaplar",["kitap"=>$kitap]);
+        $book=kitapmodel::all();
+        return view("kitaplar",["book"=>$book]);
     }
 }
