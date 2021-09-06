@@ -8,6 +8,10 @@
     <title>kitaplar</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<a class="navbar-brand" href="{{ url('/') }}">    Home    </a>
+<a class="navbar-brand" href="{{route('index') }}">   Kitaplar    </a>
+</nav>
    <table class="table">
   <thead>
     <tr>
@@ -24,8 +28,10 @@
       <td>{{$book->kitapyazari}}</td>
       <td>{{$book->kitapisbnnumarasi}}</td>
       <td><img style="height:200px; width:200px;"  src="{{ asset('/storage/images/'.$book->kitapresmi) }}"></td>
+      @if(Auth()->check())    
       <td><a href="{{route('books.edit',['book'=>$book->id])}}" class="btn btn-primary" style="text-decoration: none;">Düzenle</a></td>
       <td><a href="{{route('sil',['id'=>$book->id])}}" class="btn btn-danger" style="text-decoration: none;">Sil</a></td>
+      @endif
     </tr>
     @endforeach
     

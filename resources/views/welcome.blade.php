@@ -7,17 +7,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
     <title>verigiris</title>
   </head>
   <body>
-   Veri giriş
-   
+ 
   <form action="{{route('verigiris') }}" method="POST" enctype="multipart/form-data">
   @csrf
+  <h4 >"Veri giriş"</h4>
   <div class="-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4"></label>
