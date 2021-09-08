@@ -11,6 +11,9 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 <a class="navbar-brand" href="{{ url('/') }}">    Home    </a>
 <a class="navbar-brand" href="{{route('index') }}">   Kitaplar    </a>
+@if(Auth()->check()) 
+<a class="navbar-brand" href="{{ url('create') }}"> Veri Ekle  </a>
+@endif
 </nav>
    <table class="table">
   <thead>
@@ -24,13 +27,13 @@
   <tbody>
       @foreach($book as $key =>$book)
     <tr>
-      <td>{{$book->kitapadi}}</td>
-      <td>{{$book->kitapyazari}}</td>
-      <td>{{$book->kitapisbnnumarasi}}</td>
-      <td><img style="height:200px; width:200px;"  src="{{ asset('/storage/images/'.$book->kitapresmi) }}"></td>
+      <td>{{$book->name}}</td>
+      <td>{{$book->author}}</td>
+      <td>{{$book->isbnNO}}</td>
+      <td><img style="height:200px; width:200px;"  src="{{ asset('/storage/images/'.$book->image) }}"></td>
       @if(Auth()->check())    
       <td><a href="{{route('books.edit',['book'=>$book->id])}}" class="btn btn-primary" style="text-decoration: none;">Düzenle</a></td>
-      <td><a href="{{route('sil',['id'=>$book->id])}}" class="btn btn-danger" style="text-decoration: none;">Sil</a></td>
+      <td><a href="{{route('books.destroy',['book'=>$book->id])}}" class="btn btn-danger" style="text-decoration: none;">Sil</a></td>
       @endif
     </tr>
     @endforeach
