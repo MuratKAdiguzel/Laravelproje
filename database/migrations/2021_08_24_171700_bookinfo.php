@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Kitapbilgi extends Migration
+class Bookinfo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class Kitapbilgi extends Migration
      */
     public function up()
     {
-        Schema::create('kitaplar', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('kitapadi',60);
-            $table->string('kitapyazari',60);
-            $table->string('kitapresmi',60);
-            $table->string('kitapisbnnumarasi',60);
+            $table->string('name', 60)->nullable();
+            $table->string('author', 50)->nullable();
+            $table->string('image', 60)->nullable();
+            $table->string('isbnNO', 30)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class Kitapbilgi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kitaplar');
+        Schema::dropIfExists('books');
     }
 }
