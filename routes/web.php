@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\kitapcontroller;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +21,19 @@ Route::get('/', function () {
 
 
 
-Route::get("/kitaplar",[kitapcontroller::class,'index'])->name("index");
-Route::post("/kitapekleform",[kitapcontroller::class,'ekle'])->name("verigiris");
-Route::get('welcome', function () {
-    return view('welcome');
+Route::get("/books",[BookController::class,'index'])->name("index");
+Route::post("books/create",[BookController::class,'create'])->name("create");
+
+Route::get('create', function () {
+    return view('create');
 });
 
 
 
-Route::get("/kitapsil{id}",[kitapcontroller::class,"sil"])->name("sil");
+Route::get("/books{book}",[BookController::class,"destroy"])->name("books.destroy");
 
-Route::put('/books/{book}', [kitapcontroller::class, 'store'])->name('books.update');
-Route::get("/books/{book}/edit",[kitapcontroller::class,"edit"])->name("books.edit");
+Route::put('/books/{book}', [BookController::class, 'store'])->name('books.update');
+Route::get("/books/{book}/edit",[BookController::class,"edit"])->name("books.edit");
 
 
 
